@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Cricket {
 	public static void main(String[] args) {
 		Player p1 = new Player();
+		Player p2 = new Player();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter 1 to start game");
 		int input = sc.nextInt();
@@ -39,6 +40,26 @@ public class Cricket {
 		{
 			System.out.println(p1.getName() + " Total Score : " + p1.getScore());
 			System.out.println(p1.getName() + " Takes " + p1.getRounds() + " rounds\n\n");
+			
+			  // for player 2
+       		 System.out.println("Player : " + p2.getName() + " Needs " + (p1.getScore() + 1) + " Score In " + p1.getRounds() + " Rounds To Win MATCH");
+       		 int roundsLeft = p1.getRounds();
+      		 do {
+			System.out.println("Enter 1 to open the book : ");
+			Totalscore = sc.nextInt();
+			if (Totalscore == 1) {
+				int pagenum = (int) (Math.random() * (max - min + 1) + min);
+				System.out.print("PageNum: " + Totalscore + "      ");
+				Totalscore = (pagenum % 7);
+				System.out.println(Totalscore);
+				p1.setScore(Totalscore + p1.getScore());
+				p1.setRounds(p1.getRounds() + 1);
+				System.out.print("Point : " + Totalscore + "      ");
+				System.out.println("Score : " + p1.getScore());
+			}
+			}
+		
+                }
 
 		}
 
