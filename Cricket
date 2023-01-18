@@ -2,86 +2,74 @@ package com.monocept.test;
 
 import java.util.Scanner;
 
-public class Cricket {
-	Player p1;
-	Player p2;
+public class Game {
+	public static void book() {
+		int remainder;
+		int turns;
+		String Player1;
+		String Player2;
+		int score1 = 0;
+		int score2 = 0;
+		int min = 0, max = 300;
 
-	public void Hello() {
-		System.out.println("!!!!!!!!!!!!Welcome to BookCricketGame !!!!!!!!!!!!!");
-	}
-
-	public void Game() {
-		p1 = new Player();
-		p2 = new Player();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter 1 To Start Game And 0 For Exit : ");
+		System.out.println("Enter 1 to enter game and 0 for Exit: ");
 		if (sc.nextInt() == 0)
 			return;
+		turns = 0;
+		System.out.println("Enter Player1 name - ");
+		Player1 = sc.next();
+		System.out.println("Enter Player2 name - ");
+		Player2 = sc.next();
+		System.out.println("Player1 is: " + Player1);
 
-		System.out.println("Enter Player 1 Name : ");
-		p1.setName(sc.next());
-		System.out.println("Enter Player 2 Name : ");
-		p2.setName(sc.next());
-		startGame();
-	}
-
-	public void startGame() {
-		// for player 1
-		System.out.println("Player : " + p1.getName());
-		Scanner sc = new Scanner(System.in);
-		int min = 0, max = 300;
-		int Totalscore;
 		do {
-			System.out.println("Enter 1 to open the book : ");
-			Totalscore = sc.nextInt();
-			if (Totalscore == 1) {
-				int pagenum = (int) (Math.random() * (max - min + 1) + min);
-				System.out.print("PageNum: " + Totalscore + "      ");
-				Totalscore = (pagenum % 7);
-				p1.setScore(Totalscore + p1.getScore());
-				p1.setRounds(p1.getRounds() + 1);
-				System.out.println("Point : " + Totalscore + "      ");
-				System.out.println("Score : " + p1.getScore());
-			}
-		} while (Totalscore != 0);
-		System.out.println(p1.getName() + " Total Score : " + p1.getScore());
-		System.out.println(p1.getName() + " Takes " + p1.getRounds() + " rounds\n\n");
+			int randomPage = (int) (Math.random() * (max - min + 1) + min);
+			turns++;
+			System.out.println("RandomePage number - " + randomPage + " with turns " + turns);
+			remainder = randomPage % 7;
+			score1 = score1 + remainder;
+			System.out.println("Page number - " + randomPage);
+			System.out.println("Points- " + remainder);
+			System.out.println("Score- " + score1);
 
-		// for player 2
-		System.out.println("Player : " + p2.getName() + " Needs " + (p1.getScore() + 1) + " Score In " + p1.getRounds()
-				+ " Rounds To Win MATCH");
-		int roundsLeft = p1.getRounds();
+		} while (remainder > 0);
+
+		if (remainder == 0) {
+			System.out.println("Player " + Player1 + " is OUT with below details");
+			System.out.println("Player " + Player1 + " has Total score - " + score1);
+			System.out.println("Player " + Player1 + " has Total turns - " + turns);
+			score1 += 1;
+			System.out.println(Player2 + " has to score " + score1 + " and in turns  " + turns + " to WIN");
+		}
 		do {
-			System.out.println("Enter 1 to open the book : ");
-			Totalscore = sc.nextInt();
-			if (Totalscore == 1) {
-				roundsLeft--;
-				int pagenum = (int) (Math.random() * (max - min + 1) + min);
-				System.out.print("PageNum: " + Totalscore + "      ");
-				Totalscore = (pagenum % 7);
-				p2.setScore(Totalscore + p2.getScore());
-				p2.setRounds(p2.getRounds() + 1);
-				System.out.println("Point : " + Totalscore + "      ");
-				System.out.println("Score : " + p2.getScore() + "   ");
-				System.out.println("Rounds Left : " + roundsLeft);
-				if (p2.getScore() >= p1.getScore()) {
-					if (roundsLeft != 0) {
-						System.out.println(p2.getName() + " Win Match !! ");
-					}
-					break;
+			turns--;
+			int randomPage = (int) (Math.random() * (max - min + 1) + min);
+			System.out.println("RandomePage number - " + randomPage + " with turns " + turns);
+			remainder = randomPage % 7;
+			score2 = score2 + remainder;
+			System.out.println("Page number - " + randomPage);
+			System.out.println("Points- " + remainder);
+			System.out.println("Score- " + score2);
+			System.out.println("Turns left: " + turns);
+			if (score2 > score1) {
+				if (turns != 0) {
+					System.out.println(Player2 + " Win Match !! ");
 				}
+				break;
+			}
+		} while (remainder > 0);
 
-			}
-			if (roundsLeft == 0 || Totalscore == 0) {
-				System.out.println(p1.getName() + " Win Match !! ");
-			}
-		} while (roundsLeft > 0);
+		if (remainder == 0) {
+			System.out.println("Player " + Player2 + " is OUT with below details");
+			System.out.println("Player " + Player2 + " has Total score - " + score2);
+			System.out.println("Player " + Player2 + " has Total turns - " + turns);
+		}
+		if (turns == 0 || remainder == 0) {
+			System.out.println(Player1 + " Win Match !! ");
+		}
 	}
-
 	public static void main(String[] args) {
-		Cricket c = new Cricket();
-		c.Hello();
-		c.Game();
-		c.startGame();
+		book();
 	}
 }
