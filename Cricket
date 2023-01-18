@@ -65,7 +65,7 @@ public class Game {
 			System.out.println("Player " + Player2 + " has Total score - " + score2);
 			System.out.println("Player " + Player2 + " has Total turns - " + turns);
 		}
-		if (turns == 0 || remainder == 0) {
+		if (turns == 0 && remainder == 0) {
 			System.out.println(Player1 + " Win Match !! ");
 		}
 	}
