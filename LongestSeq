@@ -1,0 +1,30 @@
+package com.monocept.test;
+
+import java.util.Scanner;
+
+public class LongestSeq {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of elements between 0 or 1");
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		for (int i = 0; i < n; i++) {
+			arr[i] = sc.nextInt();
+		}
+
+		int max = 0;
+		int counter = 0;
+		for (int i = 0; i < n; i++) {
+			if (arr[i] == 1) {
+				counter++;
+			} else {
+				if (max < counter)
+					max = counter;
+				counter = 0;
+			}
+		}
+		if (max < counter)
+			max = counter;
+		System.out.println("Longest sequence is of length: " + max);
+	}
+}
