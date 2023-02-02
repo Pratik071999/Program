@@ -1,0 +1,77 @@
+package com.monocept.model;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class PigDice1 {
+	private int turn;
+	private int totalscore;
+
+	Scanner sc = new Scanner(System.in);
+	Random r = new Random();
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+
+	public int getTotalscore() {
+		return totalscore;
+	}
+
+	public void setTotalscore(int totalscore) {
+		this.totalscore = totalscore;
+	}
+	
+	public void Welcome() {
+		System.out.println("!!!!!!!!!!!!!!!!!!!Welcome to PIG DICE!!!!!!!!!!!!!!!");
+	}
+
+	public void playGame() {
+		while (getTotalscore() < 20) {
+			turn++;
+			System.out.println("Turn: " + getTurn());
+			int turnscore = 0;
+			char c;
+			while (true) {
+				System.out.println("Roll or Hold?(r/h): ");
+				c = sc.next().charAt(0);
+				if (c == 'r') {
+					int die = (int) r.nextInt(6) + 1;
+					System.out.println("Die: " + die);
+					if (die == 1) {
+						System.out.println("Lost All points turn over. No score");
+						break;
+					}
+					turnscore = turnscore + die;
+
+				} else if (c == 'h') {
+					totalscore = totalscore + turnscore;
+					System.out.println("Score for the turn is: " + turnscore);
+					System.out.println("Total score is: " + getTotalscore());
+					break;
+
+				}
+			}
+		}
+		System.out.println("You finished in " + getTurn() + " turns");
+	}
+}
+
+package com.monocept.test;
+
+import com.monocept.model.PigDice1;
+
+public class PlayPigTest {
+
+	public static void main(String[] args) {
+		PigDice1 pig=new PigDice1();
+		pig.Welcome();
+		pig.playGame();
+
+	}
+
+}
